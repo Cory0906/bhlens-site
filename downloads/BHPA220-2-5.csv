@@ -1,0 +1,9 @@
+﻿Parameter,Reference value
+Model,BHPA220-2-5
+Dimensions,200 x 160 mm
+Thickness,2 mm
+Material,PMMA
+Groove pitch,0.5 mm
+Focal length,220 mm
+Status,Historical reference - current specifications and availability require confirmation
+Source,https://int-brain-lab.github.io/iblrig/hardware/bom/behavior_rig.html
