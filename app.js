@@ -6,7 +6,7 @@ document.querySelectorAll('[data-filter]').forEach(b=>b.addEventListener('click'
 const form=document.querySelector('#enquiry');
 if(form){const zh=document.documentElement.lang.startsWith('zh');
 form.elements.model.value=new URLSearchParams(location.search).get('model')||'';
-const labelOf=el=>(el.type==='radio'?el.closest('fieldset')?.querySelector('legend'):el.closest('label'))?.childNodes[0]?.textContent.trim()||el.name;
+const labelOf=el=>el.type==='radio'?(zh?'需求性质':'Requirement type'):el.closest('label')?.childNodes[0]?.textContent.trim()||el.name;
 const lines=()=>{const out=[];for(const el of form.elements){if(!el.name||(el.type==='radio'&&!el.checked)||!el.value.trim())continue;out.push(labelOf(el)+': '+el.value.trim());}const drawing=document.querySelector('#drawing')?.files?.[0];if(drawing)out.push((zh?'图纸文件（请附上）':'Drawing file (please attach)')+': '+drawing.name);return out;};
 const status=t=>{document.querySelector('#form-status').textContent=t;};
 form.addEventListener('submit',e=>{e.preventDefault();const d=new FormData(form);const who=d.get('company')||d.get('name');const what=d.get('model')||d.get('request_type');const subject=(zh?'询盘':'Enquiry')+': '+what+(who?' · '+who:'');const body=[...lines(),'',zh?'（通过 bhlens.com 询盘表单生成）':'(Prepared with the bhlens.com enquiry form)'].join('\n');location.href='mailto:'+form.dataset.email+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);status(form.dataset.success);});
